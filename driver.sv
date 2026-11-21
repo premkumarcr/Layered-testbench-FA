@@ -14,9 +14,10 @@ class driver;
             transaction trans;
             gen2driv.get(trans);
 
-            vif.a   <= trans.a;
-            vif.b   <= trans.b;
-            vif.cin <= trans.cin;
+            // Blocking assignments are appropriate for testbench stimulus.
+            vif.a   = trans.a;
+            vif.b   = trans.b;
+            vif.cin = trans.cin;
 
             #5;
             trans.sum   = vif.sum;
