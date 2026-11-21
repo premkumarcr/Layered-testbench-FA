@@ -2,6 +2,7 @@
 //NAME:VIVEK REDDY A
 
 `include "interface.sv"
+`include "full_adder.sv"
 `include "test.sv"
 
 module tb;
