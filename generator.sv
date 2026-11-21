@@ -1,14 +1,13 @@
 class generator;
 
     transaction trans;
-    mailbox gen2driv;
+    mailbox #(transaction) gen2driv;
 
-    function new(mailbox gen2driv);
+    function new(mailbox #(transaction) gen2driv);
         this.gen2driv = gen2driv;
     endfunction
 
     task main();
-       
         repeat(8)
         begin
             trans = new();
