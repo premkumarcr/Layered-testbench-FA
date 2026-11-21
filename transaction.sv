@@ -1,13 +1,15 @@
-`include "environment.sv"
+class transaction;
 
-program test(intf i_intf);
+    rand bit a;
+    rand bit b;
+    rand bit cin;
 
-    environment env;
+    bit sum;
+    bit carry;
 
-    initial
-    begin
-        env = new(i_intf);
-        env.run();
-    end
+    function void display(string tag = "Transaction");
+        $display("[%s] a=%0b b=%0b cin=%0b sum=%0b carry=%0b",
+                 tag, a, b, cin, sum, carry);
+    endfunction
 
-endprogram
+endclass
