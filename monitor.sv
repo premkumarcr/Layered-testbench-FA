@@ -1,26 +1,18 @@
 class monitor;
 
-    virtual intf vif;
+    mailbox #(transaction) driv2mon;
     mailbox #(transaction) mon2scb;
 
-    function new(virtual intf vif, mailbox #(transaction) mon2scb);
-        this.vif = vif;
+    function new(mailbox #(transaction) driv2mon,
+                 mailbox #(transaction) mon2scb);
+        this.driv2mon = driv2mon;
         this.mon2scb = mon2scb;
     endfunction
 
     task main;
-        repeat(8)
-        begin
+        repeat(8) begin
             transaction trans;
-            #3;
-
-            trans = new();
-            trans.a     = vif.a;
-            trans.b     = vif.b;
-            trans.cin   = vif.cin;
-            trans.sum   = vif.sum;
-            trans.carry = vif.carry;
-
+            driv2mon.get(trans);
             trans.display("Monitor");
             mon2scb.put(trans);
         end
