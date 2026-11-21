@@ -1,0 +1,26 @@
+name: SystemVerilog Simulation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verilator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Verilator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y verilator build-essential
+
+      - name: Build testbench
+        run: verilator --binary --timing --trace --top-module tb -Wno-fatal testbench.sv
+
+      - name: Run full-adder testbench
+        run: ./obj_dir/Vtb
