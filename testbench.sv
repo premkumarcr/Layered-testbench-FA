@@ -3,13 +3,12 @@
 
 `include "interface.sv"
 `include "full_adder.sv"
-`include "test.sv"
+`include "environment.sv"
 
 module tb;
 
     intf i_intf();
-
-    test t1(i_intf);
+    environment env;
 
     full_adder dut (
         .a(i_intf.a),
@@ -23,6 +22,9 @@ module tb;
     begin
         $dumpfile("dump.vcd");
         $dumpvars(0, tb);
+
+        env = new(i_intf);
+        env.run();
     end
 
 endmodule
