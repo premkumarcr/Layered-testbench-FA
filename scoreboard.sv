@@ -1,8 +1,8 @@
 class scoreboard;
 
-    mailbox mon2scb;
+    mailbox #(transaction) mon2scb;
 
-    function new(mailbox mon2scb);
+    function new(mailbox #(transaction) mon2scb);
         this.mon2scb = mon2scb;
     endfunction
 
