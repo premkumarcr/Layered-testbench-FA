@@ -6,7 +6,9 @@ module full_adder (
     output logic carry
 );
 
-    assign sum   = a ^ b ^ cin;
-    assign carry = (a & b) | (b & cin) | (a & cin);
+    always_comb begin
+        sum   = a ^ b ^ cin;
+        carry = (a & b) | (b & cin) | (a & cin);
+    end
 
 endmodule
