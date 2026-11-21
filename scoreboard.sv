@@ -10,6 +10,9 @@ class scoreboard;
         transaction trans;
         bit expected_sum;
         bit expected_carry;
+        int passed;
+
+        passed = 0;
 
         repeat(8)
         begin
@@ -22,13 +25,21 @@ class scoreboard;
 
             if ((expected_sum == trans.sum) &&
                 (expected_carry == trans.carry))
+            begin
+                passed++;
                 $display("PASS: Result is as Expected");
+            end
             else
-                $error("FAIL: Wrong Result. Expected sum=%0b carry=%0b, Got sum=%0b carry=%0b",
+            begin
+                $fatal(1, "FAIL: a=%0b b=%0b cin=%0b; Expected sum=%0b carry=%0b, Got sum=%0b carry=%0b",
+                       trans.a, trans.b, trans.cin,
                        expected_sum, expected_carry, trans.sum, trans.carry);
+            end
 
             trans.display("Scoreboard");
         end
+
+        $display("TEST SUMMARY: %0d/8 transactions passed.", passed);
     endtask
 
 endclass
