@@ -12,6 +12,7 @@ class environment;
     scoreboard scb;
 
     mailbox #(transaction) gen2driv;
+    mailbox #(transaction) driv2mon;
     mailbox #(transaction) mon2scb;
 
     virtual intf vif;
@@ -20,11 +21,12 @@ class environment;
         this.vif = vif;
 
         gen2driv = new();
+        driv2mon = new();
         mon2scb = new();
 
         gen  = new(gen2driv);
-        driv = new(vif, gen2driv);
-        mon  = new(vif, mon2scb);
+        driv = new(vif, gen2driv, driv2mon);
+        mon  = new(driv2mon, mon2scb);
         scb  = new(mon2scb);
     endfunction
 
