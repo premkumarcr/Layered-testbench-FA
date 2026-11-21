@@ -11,8 +11,8 @@ class environment;
     monitor mon;
     scoreboard scb;
 
-    mailbox gen2driv;
-    mailbox mon2scb;
+    mailbox #(transaction) gen2driv;
+    mailbox #(transaction) mon2scb;
 
     virtual intf vif;
 
