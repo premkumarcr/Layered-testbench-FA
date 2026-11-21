@@ -1,6 +1,6 @@
 `include "environment.sv"
 
-program test(intf i_intf);
+module test(intf i_intf);
 
     environment env;
 
@@ -10,4 +10,4 @@ program test(intf i_intf);
         env.run();
     end
 
-endprogram
+endmodule
