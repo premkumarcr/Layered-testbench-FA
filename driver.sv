@@ -1,9 +1,9 @@
 class driver;
 
     virtual intf vif;
-    mailbox gen2driv;
+    mailbox #(transaction) gen2driv;
 
-    function new(virtual intf vif, mailbox gen2driv);
+    function new(virtual intf vif, mailbox #(transaction) gen2driv);
         this.vif = vif;
         this.gen2driv = gen2driv;
     endfunction
@@ -18,7 +18,6 @@ class driver;
             vif.b   <= trans.b;
             vif.cin <= trans.cin;
 
-        
             #5;
             trans.sum   = vif.sum;
             trans.carry = vif.carry;
